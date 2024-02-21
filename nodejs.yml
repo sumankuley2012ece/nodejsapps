@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejsapps-deployment
+  labels:
+    app: nodejsapps
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodejsapps
+  template:
+    metadata:
+      labels:
+        app: nodejsapps
+
+    spec:
+      containers:
+      - name: nodejsapps
+        image: appscloud97.azurecr.io/nodeappsv3:b3
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejsapps
+  namespace: default
+  labels:
+    app: nodejsapps
+ 
+spec:
+  externalTrafficPolicy: Local
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: nodejsapps
+  type: LoadBalancer
