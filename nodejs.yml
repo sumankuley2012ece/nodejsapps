@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: nodejsapps
-        image: appscloud97.azurecr.io/nodeappsv:b1
+        image: appscloud97.azurecr.io/nodeappsv:b5
         ports:
         - containerPort: 8000
 ---
